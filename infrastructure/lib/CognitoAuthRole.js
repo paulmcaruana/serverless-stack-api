@@ -26,12 +26,24 @@ export default class CognitoAuthRole extends cdk.Construct {
                  "sts:AssumeRoleWithWebIdentity"
             ),
         });
-        new cognito.CfnIdentityPoolRoleAttachment(
+        this.role.addToPolicy(
+            new iam.PolicyStatement({
+              effect: iam.Effect.ALLOW,
+              actions: [
+                "mobileanalytics:PutEvents",
+                "cognito-sync:*",
+                "cognito-identity:*",
+              ],
+              resources: ["*"],
+            })
+          );
+          
+          new cognito.CfnIdentityPoolRoleAttachment(
             this,
             "IdentityPoolRoleAttachment",
             {
                 identityPoolId: identityPool.ref,
-                roles: { authenticated: this.role.roleArn},
+                roles: { authenticated: this.role.roleArn },
             }
         );
     }

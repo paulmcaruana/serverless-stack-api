@@ -5,7 +5,7 @@ import DynamoDBStack from "../lib/DynamoDBStack";
 test("Test Stack", () => {
   const app = new sst.App();
   // WHEN
-  const stack = new DynamoDBStack(app, 'test-stack');
+  const stack = new DynamoDBStack(app, "test-stack");
   // THEN
   expect(stack).to(
     haveResource("AWS::DynamoDB::Table", {
