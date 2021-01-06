@@ -1,5 +1,7 @@
 service: notes-api
 
+frameworkVersion: ">=1.0.0 <2.0.0"
+
 # Create an optimized package for our functions
 package:
   individually: true
