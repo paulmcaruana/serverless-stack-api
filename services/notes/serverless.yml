@@ -150,9 +150,5 @@ resources:
           Type: HTTP
           Uri: http://serverless.com # the URL you want to set a proxy to
           IntegrationResponses:
-            - StatusCode: 200
-  # API Gateway Errors
-  - ${file(resources/api-gateway-errors.yml)}
-  # Cognito Identity Pool Policy
-  - ${file(resources/cognito-policy.yml)}
-  
+            - StatusCode: "200"
+            
