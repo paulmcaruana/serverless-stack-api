@@ -21,6 +21,7 @@ custom:
 provider:
   name: aws
   runtime: nodejs12.x
+  variableSyntax: "\\${{([ ~:a-zA-Z0-9._@\\'\",\\-\\/\\(\\)]+?)}}"
   stage: dev
   region: eu-west-2
 
