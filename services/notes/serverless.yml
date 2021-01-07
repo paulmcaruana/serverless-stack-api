@@ -124,6 +124,33 @@ functions:
           
 # Create our resources with separate CloudFormation templates
 resources:
+  Resources:
+    ProxyResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        ParentId:
+          Fn::GetAtt:
+            - ApiGatewayRestApi # our default Rest API logical ID
+            - RootResourceId
+        PathPart: serverless # the endpoint in your API that is set as proxy
+        RestApiId:
+          Ref: ApiGatewayRestApi
+    ProxyMethod:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        ResourceId:
+          Ref: ProxyResource
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        HttpMethod: GET # the method of your proxy. Is it GET or POST or ... ?
+        MethodResponses:
+          - StatusCode: 200
+        Integration:
+          IntegrationHttpMethod: POST
+          Type: HTTP
+          Uri: http://serverless.com # the URL you want to set a proxy to
+          IntegrationResponses:
+            - StatusCode: 200
   # API Gateway Errors
   - ${file(resources/api-gateway-errors.yml)}
   # Cognito Identity Pool Policy
